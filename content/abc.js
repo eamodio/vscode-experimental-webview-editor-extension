@@ -1,5 +1,6 @@
 // @ts-check
 (function () {
+    // @ts-ignore
     const vscode = acquireVsCodeApi();
 
     const textArea = document.querySelector('textarea');
@@ -26,5 +27,12 @@
             type: 'edit',
             value: value
         })
+    });
+
+    textArea.addEventListener('keydown', e => {
+        // Hack to disable, undo/redo in the textarea itelf
+        if (e.ctrlKey && (e.key === 'z' || e.key === 'y')) {
+            e.preventDefault();
+        }
     });
 }())
